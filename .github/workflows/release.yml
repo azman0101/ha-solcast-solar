@@ -14,12 +14,16 @@ jobs:
       contents: write
     steps:
       - name: "Checkout the repository"
-        uses: "actions/checkout@v6"
+        uses: "actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803" # v6
+        with:
+          persist-credentials: false
 
       - name: "Adjust version number"
         shell: "bash"
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
         run: |
-          yq -i -o json '.version="${{ github.event.release.tag_name }}"' \
+          yq -i -o json '.version = strenv(RELEASE_TAG)' \
             "${{ github.workspace }}/custom_components/solcast_solar/manifest.json"
 
       - name: "ZIP the integration directory"
@@ -29,6 +33,6 @@ jobs:
           zip solcast_solar.zip -r ./
 
       - name: "Upload the ZIP file to the release"
-        uses: softprops/action-gh-release@v3
+        uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64 # v3
         with:
           files: ${{ github.workspace }}/custom_components/solcast_solar/solcast_solar.zip
