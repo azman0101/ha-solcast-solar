@@ -1,5 +1,11 @@
 # Contributing
 
+Contributions to this fork target `azman0101/ha-solcast-solar`, maintained by
+@azman0101. Credit the original work in [NOTICE.md](NOTICE.md), retain existing
+license notices and declare AI assistance in pull requests. The guidelines below
+are inherited from upstream; upstream contributors are not responsible for
+reviewing or supporting changes in this fork.
+
 Thanks for taking an interest in `ha-solcast-solar`. This is a small project, maintained by only a couple of contributors, so although there's no formal process to wade through — just clone it, make your change, and open a PR, there are some rules and some expectations. This document sets out those rules and expectations:  An associated document - [DEVELOPERS.md](DEVELOPERS.md) sets out how to get a dev environment running, how to get tests running, the expectations about testing, and coding conventions and quality.
 
 There's no way to run this integration standalone outside Home Assistant — `coordinator.py`, `config_flow.py`, etc. all import `homeassistant.*`, so it only loads inside a real HA instance or Dev Container.
