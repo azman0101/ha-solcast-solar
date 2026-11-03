@@ -1,26 +1,21 @@
 # Security Policy
 
-## Supported Versions
+This policy applies to the azman0101-maintained fork. The current `main` branch
+receives best-effort maintenance; there are no fork releases at the time of the
+initial adoption review. The inherited integration version `4.6.3` is an upstream
+baseline, not a promise to support upstream releases.
 
-Only current and most recently superceded versions are likely to be supported, if at all.
+## Reporting a vulnerability
 
-Support will be best efforts, focussed on removal of any accidental publication of Personally Identifiable Information (PII) in integration logs that hasn't been redacted by automatic redaction during logging.
+Use this repository's **Security → Report a vulnerability** option if available.
+If private reporting is unavailable, open an issue at
+https://github.com/azman0101/ha-solcast-solar/issues with a high-level description
+and ask for a private reporting channel before sending sensitive details.
 
-Do not report security issues in Home assistant here - report them upstream to Home Assistant.
+Do not publish API keys, credentials, precise coordinates or unredacted logs.
+Logs are useful but are not a prerequisite for reporting a security concern.
+The `solcast_solar.get_options` action currently returns API keys unredacted;
+treat its response and any automation traces containing it as sensitive.
 
-Do not report security issues in Solcast here - report them upstream to Solcast.
-
-Note that **site IDs are not PII**.
-
-| Version | Supported          |
-| ------- | ------------------ |
-| 4.4.10  | :white_check_mark: |
-| 4.4.9   | :white_check_mark: |
-| 4.4.8   | :white_check_mark: |
-| < 4.4.8 | :x:                |
-
-## Reporting a Vulnerability
-
-Report a vulnerability by raising an issue identifying that you have discovered a security issue, outlining the nature of the issue at the high level, and providing debug logging showing the logging of PII - but with the specific PII redacted.
-
-Only issues with debug logging attached (or with a mechanisim for the repository contributors to retrieve debug logging) will be reviewed.
+Report vulnerabilities in Home Assistant or Solcast itself through those
+projects' own security channels. Fork-specific reports belong in this repository.

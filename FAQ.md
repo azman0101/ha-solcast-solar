@@ -83,13 +83,13 @@ You can't filter for just the Solcast integration in the UI, so it might be a go
 
 If you get a notification that your hobbyist account is limited to the creation of -1 Home PV arrays within 1km of each other, then your account needs fixing by Solcast support.
 
-[<img src="https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/solcast_minus_one.jpeg" width="379">](https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/solcast_minus_one.jpeg)
+[<img src="https://github.com/azman0101/ha-solcast-solar/blob/main/.github/SCREENSHOTS/solcast_minus_one.jpeg" width="379">](https://github.com/azman0101/ha-solcast-solar/blob/main/.github/SCREENSHOTS/solcast_minus_one.jpeg)
 
 Billy from Solcast advises, _"This is an issue on our backend. For any future issues, if you could please just email through to support@solcast.com we'll fix it up, which will allow you to create the second site next time you log in."_
 
 What you should see is this:
 
-[<img src="https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/solcast_plus_two.png" width="379">](https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/solcast_plus_two.png)
+[<img src="https://github.com/azman0101/ha-solcast-solar/blob/main/.github/SCREENSHOTS/solcast_plus_two.png" width="379">](https://github.com/azman0101/ha-solcast-solar/blob/main/.github/SCREENSHOTS/solcast_plus_two.png)
 
 ### Q: I don't understand the README, and it's too long. Can it be simplified?
 

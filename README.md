@@ -1,13 +1,30 @@
-# HA Solcast PV Solar Forecast Integration
+# HA Solcast PV Solar Forecast Integration — azman0101 fork
 
-<!--[![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg?style=for-the-badge)](https://github.com/hacs/integration)-->
-[![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg?style=for-the-badge)](https://github.com/custom-components/hacs)
-![GitHub Release](https://img.shields.io/github/v/release/BJReplay/ha-solcast-solar?style=for-the-badge)
-[![hacs_downloads](https://img.shields.io/github/downloads/BJReplay/ha-solcast-solar/latest/total?style=for-the-badge)](https://github.com/BJReplay/ha-solcast-solar/releases/latest)
-![GitHub License](https://img.shields.io/github/license/BJReplay/ha-solcast-solar?style=for-the-badge&color=brightgreen)
-[![Tests](https://img.shields.io/github/actions/workflow/status/BJReplay/ha-solcast-solar/pytest.yml?branch=main&label=tests&style=for-the-badge)](https://github.com/BJReplay/ha-solcast-solar/actions/workflows/pytest.yml)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/y/BJReplay/ha-solcast-solar?style=for-the-badge)
-![Maintenance](https://img.shields.io/maintenance/yes/2026?style=for-the-badge&color=brightgreen)
+[![HACS Custom](https://img.shields.io/badge/HACS-Custom-41BDF5.svg?style=for-the-badge)](https://hacs.xyz/docs/faq/custom_repositories/)
+[![License](https://img.shields.io/github/license/azman0101/ha-solcast-solar?style=for-the-badge)](LICENSE.md)
+[![Tests](https://img.shields.io/github/actions/workflow/status/azman0101/ha-solcast-solar/pytest.yml?branch=main&label=tests&style=for-the-badge)](https://github.com/azman0101/ha-solcast-solar/actions/workflows/pytest.yml)
+
+## Fork maintenance and attribution
+
+This fork is maintained by [@azman0101](https://github.com/azman0101).
+It is based on [BJReplay/ha-solcast-solar](https://github.com/BJReplay/ha-solcast-solar),
+maintained upstream by BJReplay and autoSteve, with origins in
+[696GrocuttT/ha-solcast-solar](https://github.com/696GrocuttT/ha-solcast-solar)
+and the historical oziee integration. Original authors and all contributors retain
+their attribution; see [NOTICE.md](NOTICE.md) and the preserved Git history.
+The code remains licensed under [Apache License 2.0](LICENSE.md).
+
+Report fork-specific bugs and support questions in
+[this fork's issues](https://github.com/azman0101/ha-solcast-solar/issues).
+Issues are currently disabled in the fork; the repository owner needs to enable
+them under **Settings → General → Features → Issues** before this support channel is available.
+Numbered upstream issues, discussions, pull requests and the historical changelog
+remain linked to their original repository as references.
+Sponsorship links support the upstream maintainers.
+This fork does not claim endorsement by the upstream maintainers, Solcast or Home Assistant.
+
+The initial integration review, outstanding findings and validation limits are in
+[docs/INTEGRATION_REVIEW.md](docs/INTEGRATION_REVIEW.md).
 
 ## Preamble
 
@@ -19,21 +36,18 @@ It supports both manual and automated dampening to account for localised shading
 
 It also supports hard-limit controls for over-sized PV systems where inverter output is capped.
 
-This is a mature, actively maintained integration with an engaged community and responsive developers.
+This fork builds on the mature upstream integration. Fork support is provided on a best-effort basis by azman0101.
 
 This integration is not created by, maintained, endorsed nor approved by Solcast.
 
 > [!TIP]
-> #### Support Instructions
-> Please always check the [Known Issues](#known-issues) and the [FAQ](https://github.com/BJReplay/ha-solcast-solar/blob/main/FAQ.md) for common problems and solutions and always review any pinned and active [discussions](https://github.com/BJReplay/ha-solcast-solar/discussions), and review any open [issues](https://github.com/BJReplay/ha-solcast-solar/issues) before creating a new issue or discussion.
->
-> Do not post "me too" comments on existing issues (but feel free to thumbs up or subscribe to notifications on issues where you have the same issue). Nor should you assume that if you have a similar error to an open issue that it is the same. Unless that error is identical, then it is probably not the same issue.
->
-> Always consider whether you should raise an issue for a code bug or whether you need help. If you require help, please check whether there is an existing discussion that has an answer for your question, or ask a question in the discussion section. "Issue" = a likely integration code bug. "Discussion" = a 'you need help' with something / it's an issue for you.
->
-> If you believe you have found a bug, please make sure you follow the instructions in the issue template when raising that issue.
+> Check [Known issues](#known-issues), [FAQ](FAQ.md) and
+> [existing fork issues](https://github.com/azman0101/ha-solcast-solar/issues)
+> before opening a new issue. Follow the bug-report template and redact API keys
+> and personal information from logs. Upstream discussions linked in this README
+> are historical references; fork support belongs in this repository.
 
-[<img src="https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/solar_production.png">](https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/solar_production.png)
+[<img src="https://github.com/azman0101/ha-solcast-solar/blob/main/.github/SCREENSHOTS/solar_production.png">](https://github.com/azman0101/ha-solcast-solar/blob/main/.github/SCREENSHOTS/solar_production.png)
 
 > [!NOTE]
 >
@@ -44,9 +58,7 @@ This integration is not created by, maintained, endorsed nor approved by Solcast
 1. [Key Solcast integration concepts](#key-solcast-integration-concepts)
 1. [Solcast requirements](#solcast-requirements)
 1. [Installation](#installation)
-    1. [Marketplace/HACS (recommended)](#marketplace--hacs-recommended)
-        1. [Marketplace](#marketplace)
-        1. [HACS](#hacs)
+    1. [HACS custom repository (recommended)](#hacs-custom-repository-recommended)
     1. [Installing manually in HACS](#installing-manually-in-hacs)
     1. [Installing manually (not using HACS)](#installing-manually-not-using-hacs)
     1. [Beta versions](#beta-versions)
@@ -130,15 +142,15 @@ Copy the API key for use with this integration (See [Configuration](#Configurati
 
 Note the importance of getting your Solcast site configuration correct. Use the "Site is facing" hint to ensure the azimuth is signed correctly, as if this is incorrect then forecasts will appear shifted, possibly by up to an hour during the day.
 
-[<img src="https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/azimuth_tilt.png" width="600">](https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/azimuth_tilt.png)
+[<img src="https://github.com/azman0101/ha-solcast-solar/blob/main/.github/SCREENSHOTS/azimuth_tilt.png" width="600">](https://github.com/azman0101/ha-solcast-solar/blob/main/.github/SCREENSHOTS/azimuth_tilt.png)
 
 Azimuth is _not_ set as a 0-359 degree value, but rather as 0-180 for westerly facing, or zero to _minus_ 179 for easterly facing. This value is the number of degrees angled away from North, with the sign being westerly (positive) or easterly (negative). If you're not sure, then do some quick research.
 
-[<img src="https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/azimuth.png" width="300">](https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/azimuth.png)
+[<img src="https://github.com/azman0101/ha-solcast-solar/blob/main/.github/SCREENSHOTS/azimuth.png" width="300">](https://github.com/azman0101/ha-solcast-solar/blob/main/.github/SCREENSHOTS/azimuth.png)
 
 An old-school method that can work is to get a North-oriented Google Maps satellite image of your home and measure azimuth using a plastic 180 degree protractor with its straight edge aligned North/South on screen and its centre point on the side of a representative panel. Count the degrees away from North. For westerly or easterly flip the protractor. You may need to screen grab the Maps image into a PNG/JPG and add line extensions to the orientation to be able to accurately measure the angle.
 
-[<img src="https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/azimuth_house.png" width="300">](https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/azimuth_house.png)
+[<img src="https://github.com/azman0101/ha-solcast-solar/blob/main/.github/SCREENSHOTS/azimuth_house.png" width="300">](https://github.com/azman0101/ha-solcast-solar/blob/main/.github/SCREENSHOTS/azimuth_house.png)
 
 Using Google Earth or ChatGPT are other alternatives.
 
@@ -157,82 +169,35 @@ Once set up, the integration provides azimuth values as compass degrees and dire
 
 ## Installation
 
-### Marketplace / HACS (recommended)
+### HACS custom repository (recommended)
 
-*(Recommended installation method)*
+This fork is a **custom repository**. The default HACS/Marketplace listing for
+BJReplay installs the upstream integration. To install this fork:
 
-Install as a Default Repository using Marketplace / HACS.
+1. Install [HACS](https://hacs.xyz/) if needed.
+1. Back up Home Assistant, including the `solcast_solar` cache folder.
+1. If another Solcast integration is installed through HACS/Marketplace, remove
+   its downloaded integration package from that manager first. Keep the Solcast
+   config entry in **Settings → Devices & services** and its cache files.
+1. In HACS, open **Custom repositories** and add
+   `https://github.com/azman0101/ha-solcast-solar` with category **Integration**.
+1. Download **Solcast PV Forecast (azman0101)** and restart Home Assistant.
+1. Existing installations should reuse the config entry. For a new installation,
+   follow [Configuration](#configuration).
 
-Since Home Assistant 2026.11, Marketplace is built into Home Assistant and is available under **Settings** > **Marketplace**.  Marketplace is a great experience - apart from anything else, for most integrations there's no need to restart Home Assistant when installing an integration, so the set up is much smoother.  If you can upgrade, you should.  Make sure you have a backup first, of course.
+The integration domain remains `solcast_solar`; both forks write to the same
+component folder and caches. Install only one provider of this domain at a time.
+The integration keeps its existing entity names and unique IDs. Restore the
+backup if migration does not preserve your configuration.
 
-If you are stuck on an earlier version of Home Assistant, you need to install HACS: - if you haven't installed HACS yet, go do it first - more info about HACS can be found [here](https://hacs.xyz/).
-
-The easiest way to install the integration is to click the button below to open this page in your Home Assistant Marketplace / HACS page.
-
-[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=BJReplay&repository=ha-solcast-solar&category=integration)
-
-You will be prompted for your Home Assistant URL if you've never used this type of button before:
-
-[<img src="https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/MyHomeAssistantURL.png">](https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/MyHomeAssistantURL.png)
-
-Depending on whether you're using Home Assistant 2026.11 or later, or Home Assistant 2026.10 or earlier, you'll either follow the [Marketplace](#marketplace) steps or the [HACS](#hacs) steps next.
-
-#### Marketplace
-
-You'll be prompted to confirm you want to open the repository inside Marketplace inside Home Assistant:
-
-[<img src="https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/OpenPageInMarketplace.png">](https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/OpenPageInMarketplace.png)
-
-You'll be prompted to install the Solcast PV Forecast integration - with an `↓ Install` button - click on it:
-
-[<img src="https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/InstallSolcastFromMarketplace.png">](https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/InstallSolcastFromMarketplace.png)
-
-This will be followed by an installation confirmation, warning that this integration is not reviewed or supported by the Home Assistant project.  Click on `Install` to continue.
-
-[<img src="https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/InstallWarning.png">](https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/InstallWarning.png)
-
-It will jump straight to the configuration screen - jump to [Minimal Configuration](#minimal-configuration) in this readme to follow along.
-
-#### HACS
-
-You'll be prompted to confirm you want to open the repository inside HACS inside Home Assistant:
-
-[<img src="https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/OpenPageinyourHomeAssistant.png">](https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/OpenPageinyourHomeAssistant.png)
-
-You'll see this page, with a `↓ Download` button near the bottom right - click on it:
-
-[<img src="https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/Download.png">](https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/Download.png)
-
-You'll be prompted to download the Solcast PV Forecast component - click on `Download`:
-
-[<img src="https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/SolcastPVSolar.png">](https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/SolcastPVSolar.png)
-
-Once it is installed, you'll probably notice a notification pop up on `Settings`:
-
-[<img src="https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/SettingsNotification.png">](https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/SettingsNotification.png)
-
-Click on settings, and you should see a Repair notification for `Restart required`:
-
-[<img src="https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/RestartRequired.png">](https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/RestartRequired.png)
-
-[<img src="https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/RestartSubmit.png">](https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/RestartSubmit.png)
-
-[<img src="https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/SuccessIssueRepaired.png">](https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/SuccessIssueRepaired.png)
-
-If you don't see this (you might be running an older version of Home Assistant), navigate to `System`, `Settings`, click on the power Icon, and `Restart Home Assistant`.  You need to restart Home Assistant before you can then configure the Solcast PV Forecast custom component that you've just downloaded.
-
-Once you've restarted, follow along at [Configuration](#configuration) to continue setting up the Solcast PV Forecast integration component.
+HACS downloads the source tree (`zip_release: false`), so installing this fork
+does not require a published ZIP release. The inherited manifest version `4.6.3`
+identifies the upstream baseline; it does not announce a fork release. Consult
+this repository's commits and releases for fork changes.
 
 ### Installing manually in HACS
 
-More info [here](https://hacs.xyz/docs/faq/custom_repositories/)
-
-1. (If using it, remove oziee/ha-solcast-solar in HACS)
-1. Add custom repository (three vertical dots menu, top right) `https://github.com/BJReplay/ha-solcast-solar` as an `integration`
-1. Search for 'Solcast' in HACS, open it and click the `Download` button
-1. See [Configuration](#configuration) below
-
-If previously using Oziee's ha-solcast-solar then all history and config should remain.
+Use the [custom repository steps above](#hacs-custom-repository-recommended).
 
 ### Installing manually (not using HACS)
 
@@ -248,11 +213,9 @@ You probably **do not** want to do this! Use the HACS method above unless you kn
 
 ### Beta versions
 
-Beta versions may be available that fix issues.
-
-Check https://github.com/BJReplay/ha-solcast-solar/releases to see if an issue has already been resolved. If so, enable the `Solcast PV Pre-release` entity to enable beta upgrade (or for HACS v1 turn on `Show beta versions` when re-downloading).
-
-Your feedback from testing betas is most welcome in the repository [discussions](https://github.com/BJReplay/ha-solcast-solar/discussions), where a discussion will exist for any active beta.
+Check [this fork's releases](https://github.com/azman0101/ha-solcast-solar/releases)
+and release notes before installing a prerelease. Upstream releases are separate
+from releases of this fork. Do not infer fork release availability from upstream badges.
 
 ## Configuration
 
@@ -260,11 +223,11 @@ Your feedback from testing betas is most welcome in the repository [discussions]
  a. In Home Assistant, go to Settings -> [Integrations](https://my.home-assistant.io/redirect/integrations/)<br/>
  b. Click `+ Add Integrations`
 
-[<img src="https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/AddIntegration.png">](https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/AddIntegration.png)
+[<img src="https://github.com/azman0101/ha-solcast-solar/blob/main/.github/SCREENSHOTS/AddIntegration.png">](https://github.com/azman0101/ha-solcast-solar/blob/main/.github/SCREENSHOTS/AddIntegration.png)
 
  and start typing `Solcast PV Forecast` to bring up the Solcast PV Forecast integration, and select it.<br/>
 
- [<img src="https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/Setupanewintegration.png">](https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/Setupanewintegration.png)
+ [<img src="https://github.com/azman0101/ha-solcast-solar/blob/main/.github/SCREENSHOTS/Setupanewintegration.png">](https://github.com/azman0101/ha-solcast-solar/blob/main/.github/SCREENSHOTS/Setupanewintegration.png)
 
 ### Minimal Configuration
 
@@ -275,7 +238,7 @@ Your feedback from testing betas is most welcome in the repository [discussions]
 
 Make sure you use your `API Key` and not your rooftop ID created in Solcast. You can find your API key here [api key](https://toolkit.solcast.com.au/account).
 
-[<img src="https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/install.png" width="500">](https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/install.png)
+[<img src="https://github.com/azman0101/ha-solcast-solar/blob/main/.github/SCREENSHOTS/install.png" width="500">](https://github.com/azman0101/ha-solcast-solar/blob/main/.github/SCREENSHOTS/install.png)
 
 > [!IMPORTANT]
 > The API key and associated sites will be checked when the initial configuration is saved. It is possible for this initial check to fail because the Solcast API is temporarily unavailable, and if it is then simply retry configuration after some minutes. The configure error message will indicate if this is the case.
@@ -438,13 +401,13 @@ There can only be a single configuration of the total Solcast PV Forecast in the
 > [!IMPORTANT]
 > If you do not have a solar generation sensor in your system then this integration will not work in the Energy dashboard. The graph and adding the forecast integration rely on there being a solar generation sensor set up.
 
-[<img src="https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/SolarPanels.png" width="500">](https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/SolarPanels.png)
+[<img src="https://github.com/azman0101/ha-solcast-solar/blob/main/.github/SCREENSHOTS/SolarPanels.png" width="500">](https://github.com/azman0101/ha-solcast-solar/blob/main/.github/SCREENSHOTS/SolarPanels.png)
 
 In the `Solar production forecast` section, select `Forecast Production` and then select the `Solcast Solar` option. Click `Save`, and Home Assistant will do the rest for you.
 
-[<img src="https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/SolcastSolar.png" width="500">](https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/SolcastSolar.png)
+[<img src="https://github.com/azman0101/ha-solcast-solar/blob/main/.github/SCREENSHOTS/SolcastSolar.png" width="500">](https://github.com/azman0101/ha-solcast-solar/blob/main/.github/SCREENSHOTS/SolcastSolar.png)
 
-[<img src="https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/solar_production.png">](https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/solar_production.png)
+[<img src="https://github.com/azman0101/ha-solcast-solar/blob/main/.github/SCREENSHOTS/solar_production.png">](https://github.com/azman0101/ha-solcast-solar/blob/main/.github/SCREENSHOTS/solar_production.png)
 
 ### Rooftop site migration
 
@@ -488,7 +451,7 @@ There are many actions, sensors and configuration items exposed by the integrati
 
 Utilise the Home Assistant `Developer tools` to examine exposed attributes, as their naming is mostly deployment specific. Refer to examples elsewhere in this readme to gain an insight as to how they may be used.
 
-There is also a collection of Jinja2 templates provided at https://github.com/BJReplay/ha-solcast-solar/blob/main/TEMPLATES.md containing basic, intermediate and advanced templating examples.
+There is also a collection of Jinja2 templates provided at https://github.com/azman0101/ha-solcast-solar/blob/main/TEMPLATES.md containing basic, intermediate and advanced templating examples.
 
 ### Sensors
 
@@ -805,7 +768,7 @@ If dampening is active then the Dampening sensor also features these attributes:
 * `integration_automated`: Boolean. Whether automated dampening is enabled.
 * `last_updated`: Datetime. The date and time that the dampening factors were last set.
 * `factors`: Dict. The `interval` start hour:minute, and `factor` as a floating point number.
-* Attributes for each advanced option related to dampening.  See the documentation at [Advanced options](https://github.com/BJReplay/ha-solcast-solar/blob/main/ADVOPTIONS.md).
+* Attributes for each advanced option related to dampening.  See the documentation at [Advanced options](https://github.com/azman0101/ha-solcast-solar/blob/main/ADVOPTIONS.md).
 
 Example dampening sensor attributes:
 
@@ -930,7 +893,7 @@ Automated dampening will apply the same dampening factors to all rooftop sites, 
 >
 > Do also check out the "advanced options" for the integration. There are many "nerd knobs" that may be set for automated dampening, and these may solve for your issue with it.
 
-[<img src="https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/automated-dampening.png" width="500">](https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/automated-dampening.png)
+[<img src="https://github.com/azman0101/ha-solcast-solar/blob/main/.github/SCREENSHOTS/automated-dampening.png" width="500">](https://github.com/azman0101/ha-solcast-solar/blob/main/.github/SCREENSHOTS/automated-dampening.png)
 
 The theory of operation is simple, relying on two key inputs, and an optional third.
 
@@ -952,7 +915,7 @@ The base dampening factor adjustment is done because when there is significant f
 
 > [!TIP]
 >
-> Examine the `detailedForecast` attribute for each day forecast to see the automated dampening factors that have been applied to each interval. An Apex chart example is included in [`TEMPLATES.md`](https://github.com/BJReplay/ha-solcast-solar/blob/main/TEMPLATES.md) to show a practical application for this dampening information.
+> Examine the `detailedForecast` attribute for each day forecast to see the automated dampening factors that have been applied to each interval. An Apex chart example is included in [`TEMPLATES.md`](https://github.com/azman0101/ha-solcast-solar/blob/main/TEMPLATES.md) to show a practical application for this dampening information.
 
 ##### Key input: Estimated actual data from Solcast
 
@@ -1064,7 +1027,7 @@ We all don't want that.
 External energy sensors (like PV export and site export) must have a unit of measurement of mWh, Wh, kWh or MWh, and must cumulatively increase throughout a given day. If a unit of measurement cannot be determined then kWh is assumed. Other units like GWh or TWh do not make sense to use in a residential setting, and if used would result in an unacceptable loss of precision when converted to kWh so are unsupported. Other energy units like Joules and calories are also not supported, being uncommon units to use for electricity.
 
 ##### Feedback
-Your feedback regarding experience with the automated dampening feature will be most welcome in the integration repository discussions.
+Report feedback on automated dampening in [this fork's issues](https://github.com/azman0101/ha-solcast-solar/issues).
 
 Comprehensive logging at `DEBUG` level happens when automated dampening is enabled, and you are encouraged to examine and include that logged detail in any discussion that might point out a deficiency, experience (both positive and negative!), or an improvement opportunity.
 
@@ -1072,11 +1035,11 @@ Comprehensive logging at `DEBUG` level happens when automated dampening is enabl
 
 You can change the dampening factor value for any hour. Values from 0.0 - 1.0 are valid. Setting 0.95 will dampen (reduce) each Solcast forecast data value by 5%. This is reflected in the sensor values and attributes and also in the Home Assistant Energy dashboard.
 
-[<img src="https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/reconfig.png">](https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/reconfig.png)
+[<img src="https://github.com/azman0101/ha-solcast-solar/blob/main/.github/SCREENSHOTS/reconfig.png">](https://github.com/azman0101/ha-solcast-solar/blob/main/.github/SCREENSHOTS/reconfig.png)
 
-[<img src="https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/damp.png" width="500">](https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/damp.png)
+[<img src="https://github.com/azman0101/ha-solcast-solar/blob/main/.github/SCREENSHOTS/damp.png" width="500">](https://github.com/azman0101/ha-solcast-solar/blob/main/.github/SCREENSHOTS/damp.png)
 
-[<img src="https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/dampopt.png" width="500">](https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/dampopt.png)
+[<img src="https://github.com/azman0101/ha-solcast-solar/blob/main/.github/SCREENSHOTS/dampopt.png" width="500">](https://github.com/azman0101/ha-solcast-solar/blob/main/.github/SCREENSHOTS/dampopt.png)
 
 > [!TIP]
 >
@@ -1242,11 +1205,11 @@ Utilising this advanced feature alongside template sensors and Apex charts is no
 
 Configuration is by way of the `CONFIGURE` dialogue.
 
-[<img src="https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/ExcludeSites1.png" width="500">](https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/ExcludeSites1.png)
+[<img src="https://github.com/azman0101/ha-solcast-solar/blob/main/.github/SCREENSHOTS/ExcludeSites1.png" width="500">](https://github.com/azman0101/ha-solcast-solar/blob/main/.github/SCREENSHOTS/ExcludeSites1.png)
 
 Selecting sites to exclude and clicking `SUBMIT` will take effect immediately. It is not required to wait for a forecast update.
 
-[<img src="https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/ExcludeSites2.png" width="500">](https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/ExcludeSites2.png)
+[<img src="https://github.com/azman0101/ha-solcast-solar/blob/main/.github/SCREENSHOTS/ExcludeSites2.png" width="500">](https://github.com/azman0101/ha-solcast-solar/blob/main/.github/SCREENSHOTS/ExcludeSites2.png)
 
 > [!NOTE]
 >
@@ -1259,7 +1222,7 @@ It is possible to change the behaviour of some integration functions, most notab
 
 These options may be set by creating a file called `solcast-advanced.json` in the Home Assistant Solcast Solar configuration directory (usually `/config/solcast_solar`).
 
-For the available options, see the documentation at [Advanced options](https://github.com/BJReplay/ha-solcast-solar/blob/main/ADVOPTIONS.md).
+For the available options, see the documentation at [Advanced options](https://github.com/azman0101/ha-solcast-solar/blob/main/ADVOPTIONS.md).
 
 ## Sample template sensors
 
@@ -1308,7 +1271,7 @@ template:
 
 The following YAML produces a graph of today's PV generation, PV forecast and PV10 forecast. Requires [Apex Charts](https://github.com/RomRider/apexcharts-card) to be installed.
 
-[<img src="https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/forecast_today.png">](https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/forecast_today.png)
+[<img src="https://github.com/azman0101/ha-solcast-solar/blob/main/.github/SCREENSHOTS/forecast_today.png">](https://github.com/azman0101/ha-solcast-solar/blob/main/.github/SCREENSHOTS/forecast_today.png)
 
 Customise with appropriate Home Assistant sensors for today's total solar generation and solar panel PV power output.
 
@@ -1460,9 +1423,9 @@ Expect API usage issues, which will clear within 24 hours.
 
 ### Sample sites
 
-If you see sample sites (such as these) [<img src="https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/SampleSites.png">](https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/SampleSites.png) remove them from your Solcast dashboard.
+If you see sample sites (such as these) [<img src="https://github.com/azman0101/ha-solcast-solar/blob/main/.github/SCREENSHOTS/SampleSites.png">](https://github.com/azman0101/ha-solcast-solar/blob/main/.github/SCREENSHOTS/SampleSites.png) remove them from your Solcast dashboard.
 
-If you don't remove sample sites from your Solcast dashboard, you may not be able to configure the integration - you may receive an `Error Exception in __sites_data(): 'azimuth' for API key` during configuration: [<img src="https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/SampleSitesException.png">](https://github.com/BJReplay/ha-solcast-solar/blob/main/.github/SCREENSHOTS/SampleSitesException.png)
+If you don't remove sample sites from your Solcast dashboard, you may not be able to configure the integration - you may receive an `Error Exception in __sites_data(): 'azimuth' for API key` during configuration: [<img src="https://github.com/azman0101/ha-solcast-solar/blob/main/.github/SCREENSHOTS/SampleSitesException.png">](https://github.com/azman0101/ha-solcast-solar/blob/main/.github/SCREENSHOTS/SampleSitesException.png)
 
 ## Troubleshooting
 
@@ -1528,7 +1491,9 @@ The code itself resides at `/config/custom_components/solcast_solar`, and removi
 
 ## Changes
 
-Latest minor/patch releases.
+Fork changes are tracked in [this repository’s pull requests](https://github.com/azman0101/ha-solcast-solar/pulls) and releases.
+
+The following changelog is preserved from upstream. Version numbers, authors and links below refer to upstream releases.
 
 v4.6.3
 

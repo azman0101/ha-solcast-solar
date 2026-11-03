@@ -8,9 +8,11 @@ assignees: ''
 ---
 ### Help us help you.
 
-#### Do not create issues for questions on how to use or set up this integration.
+#### Support for the azman0101 fork
 
-Use the discussions for general support.  Only create issues to report geniune suspected bugs in the integration.
+Report fork-specific bugs here. For setup questions, open a blank issue in this
+repository and identify it as a support question. Upstream discussions remain
+available as historical references; upstream maintainers do not support this fork.
 
 #### This issue template requests debug logs.  Please provide them.
 
@@ -58,6 +60,9 @@ I confirm:
 - [ ] I have included **debug** logs for any AI related issues.
 
 ## Logs
+
+Redact API keys, credentials and personal information before sharing logs or
+automation traces. For security reports, follow [SECURITY.md](https://github.com/azman0101/ha-solcast-solar/blob/main/SECURITY.md).
 
 I confirm:
 
