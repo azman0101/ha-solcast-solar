@@ -2,5 +2,5 @@
     "name": "Solcast PV Forecast (azman0101)",
     "render_readme": true,
     "homeassistant": "2025.3",
-    "zip_release": false
+    "zip_release": true
 }
