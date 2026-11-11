@@ -83,7 +83,8 @@ def _make_repair_flow(hass: HomeAssistant, entry_id: str) -> ApiKeyMismatchRepai
     flow = ApiKeyMismatchRepairFlow(entry_id)
     flow.hass = hass
     flow.handler = "solcast_sim"
-    flow.issue_id = f"api_key_mismatch_{entry_id}"
+    # As the flow manager does; assigning `issue_id` directly is deprecated in Home Assistant dev.
+    flow.context = {"issue_id": f"api_key_mismatch_{entry_id}"}
     return flow
 
 
