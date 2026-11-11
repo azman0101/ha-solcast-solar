@@ -2,7 +2,7 @@ name: "Release"
 
 on:
   release:
-    types: [published, edited]
+    types: [published]
 
 permissions: {}
 
@@ -12,27 +12,30 @@ jobs:
     runs-on: "ubuntu-latest"
     permissions:
       contents: write
+      id-token: write
+      attestations: write
     steps:
       - name: "Checkout the repository"
-        uses: "actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803" # v6
+        uses: "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1" # v7.0.1
         with:
+          ref: ${{ github.event.release.tag_name }}
           persist-credentials: false
 
-      - name: "Adjust version number"
-        shell: "bash"
+      - name: "Build deterministic release assets"
         env:
           RELEASE_TAG: ${{ github.event.release.tag_name }}
-        run: |
-          yq -i -o json '.version = strenv(RELEASE_TAG)' \
-            "${{ github.workspace }}/custom_components/solcast_solar/manifest.json"
+        run: python3 scripts/build_release.py "$RELEASE_TAG"
 
-      - name: "ZIP the integration directory"
-        shell: "bash"
-        run: |
-          cd "${{ github.workspace }}/custom_components/solcast_solar"
-          zip solcast_solar.zip -r ./
-
-      - name: "Upload the ZIP file to the release"
-        uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64 # v3
+      - name: "Attest release assets"
+        uses: actions/attest-build-provenance@977bb373ede98d70efdf65b84cb5f73e068dcc2a # v3
         with:
-          files: ${{ github.workspace }}/custom_components/solcast_solar/solcast_solar.zip
+          subject-path: |
+            dist/solcast_solar.zip
+            dist/solcast_solar.spdx.json
+            dist/SHA256SUMS
+
+      - name: "Upload immutable release assets"
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: gh release upload "$RELEASE_TAG" dist/solcast_solar.zip dist/solcast_solar.spdx.json dist/SHA256SUMS
